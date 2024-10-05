@@ -140,9 +140,9 @@ for game_level in range(0,7):
                         else:
                             print('You found the final ingredient!')
             else:
+                print('GAME OVER - You were not able to guess the country even when you used up all points')
                 game_over = "Yes"
                 break
-
         if game_movement == "QUIT":
             game_over = "Yes"
             print('Sorry to see you go. Come back soon!')
@@ -156,7 +156,7 @@ for game_level in range(0,7):
 
 #add the game session into database
 if "No country" not in countries_guessed:
-    insert_session(disease_name,"0",level_completed[-1])
+    insert_session(disease_name,countries_guessed[-1],level_completed[-1])
     print(f'Game saved!Your current record is {points} points, you have guessed {countries_guessed} and finished level(s): {level_completed}')
 else:
     insert_session(disease_name,countries_guessed[0],level_completed[0])
