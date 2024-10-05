@@ -124,6 +124,14 @@ for game_level in range(0,7):
                     else:
                         game_over = "Yes"
                         break
+                else:
+                    countries_guessed.append(right_answer)
+                    level_completed.append(current_level)
+                    level_status = "success"
+                    if current_level < 7:
+                        print(f"Congratulations! You have found ingredient number {current_level}, let's move on!\n")
+                    else:
+                        print('You found the final ingredient!')
         if game_movement == "QUIT":
             game_over = "Yes"
             print('Sorry to see you go. Come back soon!')
