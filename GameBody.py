@@ -1,7 +1,4 @@
 import random
-from databaseconnection import connection
-import functions_game
-from functions_game import insert_data_disease_table
 from functions_game import multiple_choice
 from functions_game import insert_session
 
@@ -41,7 +38,8 @@ from functions_game import retrieve_hints
 from functions_game import point_per_level
 
 game_movement = ""
-countries_guessed = []
+countries_guessed = ["No country"]
+level_completed = ["0"]
 game_over = "No"
 
 for game_level in range(0,7):
@@ -89,11 +87,32 @@ for game_level in range(0,7):
                 else:
                     game_over = "Yes"
                     break
+            else:
+                countries_guessed.append(right_answer)
+                level_completed.append(current_level)
+                level_status = "success"
+                print(countries_guessed, level_completed)
+                if "No country" in countries_guessed:
+                    countries_guessed.remove("No country")
+                if "0" in level_completed:
+                    level_completed.remove(level_completed[0])
+                if guess_count == 1:
+                    points = points + int(point_per_level(current_level))
+                    print('Thanks to your quick thinking, you got some extra points. Your current points:', points)
+                    print('\n')
+                else:
+                    guess_count = 1
+                if current_level < 7:
+                    print(f"Congratulations! You have found ingredient number {current_level}, let's move on!\n")
+                else:
+                    print('You found the final ingredient!')
+                break
+
+                break
         elif game_movement == "NEW HINT":
             if guess_count < 6:
                 guess_count += 1
                 points = points - int(point_per_level(current_level))
-
             else:
                 print('You have used up all hints of this level, please pick your guess!')
                 points = points - int(point_per_level(current_level)) * 2
@@ -102,32 +121,18 @@ for game_level in range(0,7):
                 while guess != right_answer:
                     guess = input(f"This ingredient is in: ").upper()
                     print('\n')
-        elif game_movement == "QUIT":
+        if game_movement == "QUIT":
             game_over = "Yes"
             print('Sorry to see you go. Come back soon!')
-            print(f'Your current record is {points} points, you have guess {countries_guessed}')
+            print(f'Your current record is {points} points, you have guessed {countries_guessed} and finished level(s): {level_completed}')
             print('\n')
-            break
-
-        if guess == right_answer:
-            if current_level < 7:
-                print(f"Congratulations! You have found ingredient number {current_level}, let's move on!\n")
-            else:
-                countries_guessed.append(right_answer)
-                level_status = "success"
-            if guess_count == 1:
-                points = points + int(point_per_level(current_level))
-                print('Thanks to your quick thinking, you got some extra points. Your current points:', points)
-                print('\n')
-            else:
-                guess_count = 1
             break
         if game_over == "Yes" or level_status == "success":
             break
     if game_over == "Yes":
         break
 #add the game session into database
-insert_session(disease_name,right_answer,current_level)
+insert_session(disease_name,countries_guessed[-1],level_completed[-1])
 print('Your game has been saved')
 
 if game_movement != "QUIT" :
@@ -140,6 +145,7 @@ else:
 #need to improve the finishing lines
 decision = input('Do you want to retry or quit?').upper()
 if decision == "RETRY":
+    print("Great! To replay, let's restart the program")
     game_over = "No"
     points = 300
     guess_count = 1
