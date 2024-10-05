@@ -28,8 +28,10 @@ CREATE TABLE `countries` (
   `name` varchar(100) NOT NULL,
   `continent` varchar(100) NOT NULL,
   `sort_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`country_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `sort_it` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`country_id`),
+  UNIQUE KEY `sort_it` (`sort_it`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,27 +41,27 @@ CREATE TABLE `countries` (
 LOCK TABLES `countries` WRITE;
 /*!40000 ALTER TABLE `countries` DISABLE KEYS */;
 INSERT INTO `countries` VALUES
-(302556,'ANGOLA','Africa',1),
-(302593,'NIGERIA','Africa',2),
-(302627,'CHINA','Asia',3),
-(302634,'INDIA','Asia',4),
-(302639,'JAPAN','Asia',5),
-(302641,'CAMBODIA','Asia',6),
-(302654,'NEPAL','Asia',7),
-(302657,'PAKISTAN','Asia',8),
-(302661,'SINGAPORE','Asia',9),
-(302667,'TURKEY','(Europe,Asia)',10),
-(302668,'TAIWAN','Asia',11),
-(302683,'ESTONIA','Europe',12),
-(302685,'FINLAND','Europe',13),
-(302687,'FRANCE','Europe',14),
-(302711,'PORTUGAL','Europe',15),
-(302730,'CANADA','North America',16),
-(302755,'USA','North America',17),
-(302764,'AUSTRALIA','Oceania',18),
-(302776,'NEW ZEALAND','Oceania',19),
-(302789,'ARGENTIINA','South America',20),
-(302791,'BRAZIL','South America',21);
+(302556,'ANGOLA','Africa',1,1),
+(302593,'NIGERIA','Africa',2,2),
+(302627,'CHINA','Asia',3,3),
+(302634,'INDIA','Asia',4,4),
+(302639,'JAPAN','Asia',5,5),
+(302641,'CAMBODIA','Asia',6,6),
+(302654,'NEPAL','Asia',7,7),
+(302657,'PAKISTAN','Asia',8,8),
+(302661,'SINGAPORE','Asia',9,9),
+(302667,'TURKEY','(Europe,Asia)',10,10),
+(302668,'TAIWAN','Asia',11,11),
+(302683,'ESTONIA','Europe',12,12),
+(302685,'FINLAND','Europe',13,13),
+(302687,'FRANCE','Europe',14,14),
+(302711,'PORTUGAL','Europe',15,15),
+(302730,'CANADA','North America',16,16),
+(302755,'USA','North America',17,17),
+(302764,'AUSTRALIA','Oceania',18,18),
+(302776,'NEW ZEALAND','Oceania',19,19),
+(302789,'ARGENTIINA','South America',20,20),
+(302791,'BRAZIL','South America',21,21);
 /*!40000 ALTER TABLE `countries` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1013,4 +1015,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2024-10-05 11:59:36
+-- Dump completed on 2024-10-05 12:17:47
