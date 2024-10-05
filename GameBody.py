@@ -51,7 +51,7 @@ for game_level in range(0,7):
 
 
 
-    print(final_country_list[game_level])
+    #print(final_country_list[game_level])
     right_answer = final_country_list[game_level]
     current_level = game_level + 1
     hint_list = retrieve_hints(final_country_list[game_level], current_level)
@@ -91,7 +91,6 @@ for game_level in range(0,7):
                 countries_guessed.append(right_answer)
                 level_completed.append(current_level)
                 level_status = "success"
-                print(countries_guessed, level_completed)
                 if "No country" in countries_guessed:
                     countries_guessed.remove("No country")
                 if "0" in level_completed:
@@ -106,8 +105,6 @@ for game_level in range(0,7):
                     print(f"Congratulations! You have found ingredient number {current_level}, let's move on!\n")
                 else:
                     print('You found the final ingredient!')
-                break
-
                 break
         elif game_movement == "NEW HINT":
             if guess_count < 6:
@@ -134,7 +131,10 @@ for game_level in range(0,7):
 #add the game session into database
 if "No country" not in countries_guessed:
     insert_session(disease_name,countries_guessed[-1],level_completed[-1])
-    print('Your game has been saved')
+    print(f'Game saved!Your current record is {points} points, you have guessed {countries_guessed} and finished level(s): {level_completed}')
+else:
+    insert_session(disease_name,"No country", "1")
+    print(f'Game saved!Your current record is {points} points, you have guessed {countries_guessed} and finished level(s): {level_completed}')
 
 if game_movement != "QUIT" :
     if points > 0:
