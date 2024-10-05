@@ -44,21 +44,25 @@ game_movement = ""
 countries_guessed = []
 game_over = "No"
 
-for game_level in range(0,8):
+for game_level in range(0,7):
         #generate randomly 6 hints for the country for the current level
         #enter into the function: the country after being randomly picked and game level
         #example: in the 1st level final_country_list[0] - which is the 1st country, and enter into the current level parameter as 1 (0+1),
         #print(game_level)
         #print(final_country_list[game_level])
 
-    hint_list = retrieve_hints(final_country_list[game_level],game_level+1)
-    #print(final_country_list[game_level])
+
+
+    print(final_country_list[game_level])
     right_answer = final_country_list[game_level]
     current_level = game_level + 1
+    hint_list = retrieve_hints(final_country_list[game_level], current_level)
     #print(hint_list)
     print('Level',current_level)
 
-    for hint_number in range(0,7):
+
+    for hint_number in range(0,6):
+        print('Your current points:', points)
         print(hint_list[hint_number])
         level_status = ""
         game_movement = input("What do you want to do: guess, new hint or quit?\n").upper()
@@ -70,7 +74,7 @@ for game_level in range(0,8):
             guess = input(f"This ingredient is in: ").upper()
             while guess != right_answer:
                 if points >= 0:
-                    if hint_number < 6:
+                    if hint_number < 5:
                         points = points - int(point_per_level(current_level))
                         guess_count += 1
                         print('Your guess was wrong, please view the next hint and try again')
@@ -85,11 +89,11 @@ for game_level in range(0,8):
                 else:
                     game_over = "Yes"
                     break
-
         elif game_movement == "NEW HINT":
             if guess_count < 6:
                 guess_count += 1
                 points = points - int(point_per_level(current_level))
+
             else:
                 print('You have used up all hints of this level, please pick your guess!')
                 points = points - int(point_per_level(current_level)) * 2
@@ -101,13 +105,33 @@ for game_level in range(0,8):
         elif game_movement == "QUIT":
             game_over = "Yes"
             print('Sorry to see you go. Come back soon!')
-            print('Your current records is', points, countries_guessed)
+            print(f'Your current record is {points} points, you have guess {countries_guessed})
             print('\n')
             break
+        while guess != right_answer:
+            level_status = ""
+            if points >= 0:
+                if hint_number < 6:
+                    points = points - int(point_per_level(current_level))
+                    guess_count += 1
+                    print('Your guess was wrong, please view the next hint and try again')
+                    print('Your current points:', points)
+                    print('\n')
+                    break
+                else:
+                    points = points - int(point_per_level(current_level)) * 1.5
+                    multiple_choice(final_country_list[game_level])
+                    print('Your current points:', points)
+                    guess = input(f"This ingredient is in: \n").upper()
+            else:
+                game_over = "Yes"
+                break
         if guess == right_answer:
-            print(f"Congratulations! You have found ingredient number {current_level}, let's move on!\n")
-            countries_guessed.append(right_answer)
-            level_status = "success"
+            if current_level < 7:
+                print(f"Congratulations! You have found ingredient number {current_level}, let's move on!\n")
+            else:
+                countries_guessed.append(right_answer)
+                level_status = "success"
             if guess_count == 1:
                 points = points + int(point_per_level(current_level))
                 print('Thanks to your quick thinking, you got some extra points. Your current points:', points)
@@ -123,12 +147,13 @@ for game_level in range(0,8):
 insert_session(disease_name,right_answer,current_level)
 print('Your game has been saved')
 
-if game_movement != "QUIT":
+if game_movement != "QUIT" :
     if points > 0:
         print(f'Congratulation, you have found all ingredients with {points} points left.')
     else:
         print('GAME OVER - You failed to find all ingredients within the points given.\n')
-
+else:
+    print()
 #need to improve the finishing lines
 decision = input('Do you want to retry or quit?').upper()
 if decision == "RETRY":
