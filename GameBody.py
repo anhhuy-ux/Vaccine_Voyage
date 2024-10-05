@@ -143,40 +143,6 @@ elif decision == "QUIT":
 
 
 
-    """
-
-    for movement in hint_level:
-        game_movement = input("What do you want to do: guess, new hint or quit?").upper
-        if game_movement == "GUESS":
-            guess = input("This ingredient is in: ")
-            if guess == hints:
-                if guess == :
-                    points += 10
-                hint_level += 1
-                print(greetings)
-                insert_data_disease_table(names, country)
-                else guess != hint:
-                    points = point_counter()
-                    print("Not this time, try again...")
-        elif game_movement == "NEW HINT":
-            hints = retrieve_hints(country, level)
-        else game_movement == "QUIT":
-            break()
-        game_movement = input("What do you want to do: guess, new hint or quit?").upper
-
-    for hint in hints:
-        if hint <= 6:
-            hint = hints
-            points = point_counter()
-        elif hint > 6:
-            hint = muliple_choice
-            points = point_counter()
-
-"""
-
-
-
-
 
 
 
