@@ -128,6 +128,10 @@ for game_level in range(0,7):
                 else:
                     countries_guessed.append(right_answer)
                     level_completed.append(current_level)
+                    if "No country" in countries_guessed:
+                        countries_guessed.remove("No country")
+                    if "0" in level_completed:
+                        level_completed.remove(level_completed[0])
                     level_status = "success"
                     guess_count = 1
                     if current_level < 7:
