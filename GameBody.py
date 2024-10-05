@@ -122,7 +122,7 @@ for game_level in range(0,7):
             else:
                 guess_count = 1
             break
-        if (game_over == "Yes" or level_status == "success"):
+        if game_over == "Yes" or level_status == "success":
             break
     if game_over == "Yes":
         break
