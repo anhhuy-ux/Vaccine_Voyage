@@ -132,8 +132,9 @@ for game_level in range(0,7):
     if game_over == "Yes":
         break
 #add the game session into database
-insert_session(disease_name,countries_guessed[-1],level_completed[-1])
-print('Your game has been saved')
+if "No country" not in countries_guessed:
+    insert_session(disease_name,countries_guessed[-1],level_completed[-1])
+    print('Your game has been saved')
 
 if game_movement != "QUIT" :
     if points > 0:
