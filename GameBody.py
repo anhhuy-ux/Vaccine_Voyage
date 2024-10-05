@@ -107,7 +107,7 @@ for game_level in range(0,7):
                     print('You found the final ingredient!')
                 break
         elif game_movement == "NEW HINT":
-            if hint_number < 5:
+            if guess_count < 5:
                 guess_count += 1
                 points = points - int(point_per_level(current_level))
             else:
@@ -129,6 +129,7 @@ for game_level in range(0,7):
                     countries_guessed.append(right_answer)
                     level_completed.append(current_level)
                     level_status = "success"
+                    guess_count = 1
                     if current_level < 7:
                         print(f"Congratulations! You have found ingredient number {current_level}, let's move on!\n")
                     else:
