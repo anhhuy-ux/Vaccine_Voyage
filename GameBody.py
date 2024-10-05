@@ -105,27 +105,10 @@ for game_level in range(0,7):
         elif game_movement == "QUIT":
             game_over = "Yes"
             print('Sorry to see you go. Come back soon!')
-            print(f'Your current record is {points} points, you have guess {countries_guessed})
+            print(f'Your current record is {points} points, you have guess {countries_guessed}')
             print('\n')
             break
-        while guess != right_answer:
-            level_status = ""
-            if points >= 0:
-                if hint_number < 6:
-                    points = points - int(point_per_level(current_level))
-                    guess_count += 1
-                    print('Your guess was wrong, please view the next hint and try again')
-                    print('Your current points:', points)
-                    print('\n')
-                    break
-                else:
-                    points = points - int(point_per_level(current_level)) * 1.5
-                    multiple_choice(final_country_list[game_level])
-                    print('Your current points:', points)
-                    guess = input(f"This ingredient is in: \n").upper()
-            else:
-                game_over = "Yes"
-                break
+
         if guess == right_answer:
             if current_level < 7:
                 print(f"Congratulations! You have found ingredient number {current_level}, let's move on!\n")
