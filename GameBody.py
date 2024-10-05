@@ -142,6 +142,7 @@ for game_level in range(0,7):
             else:
                 game_over = "Yes"
                 break
+
         if game_movement == "QUIT":
             game_over = "Yes"
             print('Sorry to see you go. Come back soon!')
@@ -152,21 +153,15 @@ for game_level in range(0,7):
             break
     if game_over == "Yes":
         break
+
 #add the game session into database
 if "No country" not in countries_guessed:
-    insert_session(disease_name,countries_guessed[-1],level_completed[-1])
+    insert_session(disease_name,"0",level_completed[-1])
     print(f'Game saved!Your current record is {points} points, you have guessed {countries_guessed} and finished level(s): {level_completed}')
 else:
-    insert_session(disease_name,"No country", "1")
+    insert_session(disease_name,countries_guessed[0],level_completed[0])
     print(f'Game saved!Your current record is {points} points, you have guessed {countries_guessed} and finished level(s): {level_completed}')
 
-if game_movement != "QUIT" :
-    if points > 0:
-        print(f'Congratulation, you have found all ingredients with {points} points left.')
-    else:
-        print('GAME OVER - You failed to find all ingredients within the points given.\n')
-else:
-    print()
 #need to improve the finishing lines
 decision = input('Do you want to retry or quit?').upper()
 if decision == "RETRY":
