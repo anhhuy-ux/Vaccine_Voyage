@@ -28,7 +28,7 @@ def insert_data_disease_table(names, country, cursor):
 
 
 def ingredient_country():
-    sql = f"Select name from countries order by rand() limit 7"
+    sql = f"Select name from countries where name != 'No country' order by rand() limit 7 "
     cursor = connection.cursor()
     cursor.execute(sql)
     result = cursor.fetchall()
