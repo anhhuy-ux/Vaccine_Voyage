@@ -51,7 +51,7 @@ for game_level in range(0,7):
 
 
 
-    print("This level's answer: ",final_country_list[game_level])
+    #print("This level's answer: ",final_country_list[game_level])
     right_answer = final_country_list[game_level]
     current_level = game_level + 1
     hint_list = retrieve_hints(final_country_list[game_level], current_level)
@@ -85,6 +85,7 @@ for game_level in range(0,7):
                         print('Your current points:', points)
                         guess = input(f"Please guess until you got the correct answer! This ingredient is in: \n").upper()
                 else:
+                    print('Unfortunately, you have failed to find all ingredients within the points given')
                     game_over = "Yes"
                     break
             else:
@@ -162,7 +163,7 @@ else:
     insert_session(disease_name,countries_guessed[0],level_completed[0])
     print(f'Game saved!Your current record is {points} points, you have guessed {countries_guessed} and finished level(s): {level_completed}')
 
-#need to improve the finishing lines
+# finishing lines
 decision = input('Do you want to retry or quit?').upper()
 if decision == "RETRY":
     print("Great! To replay, let's restart the program")
